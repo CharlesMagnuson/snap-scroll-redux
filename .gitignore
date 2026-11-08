@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Built store packages (rebuild from source; upload artifacts, not source)
+dist/
+
+# Node
+node_modules/

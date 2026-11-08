@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap Scroll Redux - Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1a73e8;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .content {
+            margin-top: 80px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #4285f4;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #4285f4;
+            border-radius: 4px;
+        }
+        
+        .test-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #e8f0fe;
+            border-radius: 8px;
+        }
+        
+        .paragraph-number {
+            display: inline-block;
+            background: #fbbc04;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+            padding: 5px 10px;
+            background: #e8f0fe;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        a:hover {
+            background: #d2e3fc;
+        }
+        
+        .spacer {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <strong>Snap Scroll Redux Test Page</strong> - Fixed Navigation Bar (Should be detected)
+    </header>
+    
+    <div class="content">
+        <h1>Welcome to the Snap Scroll Redux Test Page</h1>
+        
+        <div class="test-section">
+            <h2>📋 Test Instructions</h2>
+            <p><strong>Snap Scroll Test:</strong> Hold down the left mouse button, then right-click anywhere on this page. The clicked position should smoothly scroll to the top of the viewport (below this fixed header).</p>
+            <p><strong>Paragraph Navigation Test:</strong> Middle-click on any paragraph to automatically jump to the next one. Try it on this paragraph!</p>
+        </div>
+        
+        <h2>Test Content - Section 1</h2>
+        
+        <p><span class="paragraph-number">1</span>This is the first test paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Try middle-clicking here to jump to the next paragraph.</p>
+        
+        <p><span class="paragraph-number">2</span>This is the second test paragraph. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. The extension should smoothly scroll to show the next paragraph at the top.</p>
+        
+        <p><span class="paragraph-number">3</span>Here's a paragraph with a <a href="#section2">link to Section 2</a>. Middle-clicking on the link should open it in a new tab (default behavior), while middle-clicking elsewhere in this paragraph should jump to the next one.</p>
+        
+        <div class="spacer">〜 Spacer to test scrolling 〜</div>
+        
+        <h2 id="section2">Test Content - Section 2</h2>
+        
+        <p><span class="paragraph-number">4</span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. This paragraph is after a large spacer to test scrolling over distances.</p>
+        
+        <p><span class="paragraph-number">5</span>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Notice how the fixed header is automatically detected and content scrolls below it.</p>
+        
+        <div class="spacer">〜 Another spacer 〜</div>
+        
+        <h2>Test Content - Section 3</h2>
+        
+        <p><span class="paragraph-number">6</span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+        
+        <p><span class="paragraph-number">7</span>Et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+        
+        <p><span class="paragraph-number">8</span>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
+        
+        <div class="spacer">〜 More space for scrolling 〜</div>
+        
+        <h2>Test Content - Section 4</h2>
+        
+        <p><span class="paragraph-number">9</span>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences.</p>
+        
+        <p><span class="paragraph-number">10</span>This is the last paragraph. Middle-clicking here won't do anything since there's no next paragraph. You've reached the end of the test content!</p>
+        
+        <div class="test-section" style="margin-top: 60px;">
+            <h2>✅ Extension Features Verified</h2>
+            <ul>
+                <li>Fixed navigation bar detection</li>
+                <li>Snap scroll to clicked position</li>
+                <li>Paragraph-to-paragraph navigation</li>
+                <li>Link handling (middle-click on links opens new tab)</li>
+                <li>Visual feedback (blue line animation)</li>
+                <li>Smooth scrolling behavior</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="height: 500px; display: flex; align-items: center; justify-content: center; color: #999;">
+        〜 End of page 〜
+    </div>
+</body>
+</html>

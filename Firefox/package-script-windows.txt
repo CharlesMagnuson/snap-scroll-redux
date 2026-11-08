@@ -1,0 +1,71 @@
+@echo off
+REM Snap Scroll Redux - Firefox Extension Packaging Script for Windows
+
+echo Packaging Snap Scroll Redux for Firefox...
+echo.
+
+REM Check if browser-polyfill.min.js exists
+if not exist "browser-polyfill.min.js" (
+    echo ERROR: browser-polyfill.min.js not found!
+    echo Please download it from: https://github.com/mozilla/webextension-polyfill/releases/latest
+    echo.
+    pause
+    exit /b 1
+)
+
+REM Check if icons directory exists
+if not exist "icons\" (
+    echo ERROR: icons directory not found!
+    echo Please create an icons directory with icon16.png, icon48.png, and icon128.png
+    echo.
+    pause
+    exit /b 1
+)
+
+REM Create a temporary directory
+set TEMP_DIR=snap-scroll-redux-firefox
+if exist "%TEMP_DIR%" rmdir /s /q "%TEMP_DIR%"
+mkdir "%TEMP_DIR%"
+
+REM Copy all necessary files
+echo Copying files...
+copy manifest.json "%TEMP_DIR%\" >nul
+copy popup.html "%TEMP_DIR%\" >nul
+copy popup.css "%TEMP_DIR%\" >nul
+copy popup.js "%TEMP_DIR%\" >nul
+copy content.js "%TEMP_DIR%\" >nul
+copy browser-polyfill.min.js "%TEMP_DIR%\" >nul
+
+REM Copy icons directory
+xcopy /e /i /q icons "%TEMP_DIR%\icons" >nul
+
+REM Check if PowerShell is available for creating ZIP
+where powershell >nul 2>nul
+if %errorlevel% equ 0 (
+    echo Creating XPI file using PowerShell...
+    powershell -NoProfile -Command "Compress-Archive -Path '%TEMP_DIR%\*' -DestinationPath 'snap-scroll-redux-firefox.zip' -Force"
+    if exist "snap-scroll-redux-firefox.xpi" del "snap-scroll-redux-firefox.xpi"
+    ren "snap-scroll-redux-firefox.zip" "snap-scroll-redux-firefox.xpi"
+) else (
+    echo PowerShell not found. Please manually create a ZIP file of the %TEMP_DIR% folder
+    echo and rename it to snap-scroll-redux-firefox.xpi
+    echo.
+    echo Press any key to open the folder...
+    pause >nul
+    start "" "%TEMP_DIR%"
+    goto :cleanup
+)
+
+:cleanup
+REM Clean up
+echo Cleaning up...
+rmdir /s /q "%TEMP_DIR%"
+
+echo.
+echo Done! Extension packaged as snap-scroll-redux-firefox.xpi
+echo.
+echo To install:
+echo 1. For testing: Go to about:debugging in Firefox and load as temporary add-on
+echo 2. For permanent installation: Submit to addons.mozilla.org or self-distribute
+echo.
+pause
